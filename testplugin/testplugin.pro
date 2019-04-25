@@ -1,4 +1,4 @@
-QT             += widgets
+QT             -= gui
 
 TARGET          = $$qtLibraryTarget(testplugin)
 TEMPLATE        = lib

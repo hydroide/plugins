@@ -1,5 +1,3 @@
-#include <QtWidgets>
-
 #include "testplugin.h"
 
 QString TestPlugin::echo(const QString &message)
