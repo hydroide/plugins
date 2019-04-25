@@ -1,12 +1,15 @@
+QT             += widgets
+
+TARGET          = $$qtLibraryTarget(testplugin)
 TEMPLATE        = lib
 CONFIG         += plugin
-QT             += widgets
-INCLUDEPATH    += ../../interfaces
-HEADERS         = testplugin.h
-SOURCES         = testplugin.cpp
-TARGET          = $$qtLibraryTarget(testplugin)
+
 DESTDIR         = ../../plugins
 
-include(../../interfaces/interfaces.pri)
+INCLUDEPATH    += ../../interfaces
 
-EXAMPLE_FILES   = testplugin.json
+HEADERS         = testplugin.h
+SOURCES         = testplugin.cpp
+DISTFILES      += testplugin.json
+
+include(../../interfaces/interfaces.pri)

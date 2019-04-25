@@ -14,6 +14,5 @@ class TestPlugin : public QObject, TestInterface
 public:
     QString echo(const QString &message) override;
 };
-//! [0]
 
 #endif
