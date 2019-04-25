@@ -1,2 +1,3 @@
 TEMPLATE    = subdirs
-SUBDIRS	    = testplugin
+SUBDIRS	    = testplugin \
+              fileformats
