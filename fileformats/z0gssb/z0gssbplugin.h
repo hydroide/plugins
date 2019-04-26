@@ -3,7 +3,6 @@
 
 #include <QtPlugin>
 #include <fileimportinterface.h>
-#include <fileexportinterface.h>
 
 class Z0gSsbPlugin : public QObject, FileImportInterface
 {
