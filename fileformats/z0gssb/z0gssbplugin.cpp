@@ -3,6 +3,8 @@
 #include "z0gfile.h"
 #include "ssbfile.h"
 
+QSqlDatabase Z0gSsbPlugin::DB;
+
 QStringList Z0gSsbPlugin::extensions()
 {
     return QStringList() << "Z0G" << "SSB";
@@ -22,4 +24,9 @@ void Z0gSsbPlugin::import(const QString &filepath)
         SsbFile file(filepath);
         file.readFile();
     }
+}
+
+void Z0gSsbPlugin::setDatabase(QSqlDatabase db)
+{
+    Z0gSsbPlugin::DB = db;
 }

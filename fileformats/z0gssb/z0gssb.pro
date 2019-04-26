@@ -36,8 +36,6 @@ SOURCES += \
     ssbfile.cpp \
     z0gfile.cpp \
     ../../../include/modules/curvestructs.cpp \
-    ../../../include/managers/databasemanager.cpp \
-    ../../../include/managers/managerbase.cpp \
     ../../../include/models/station.cpp \
     ../../../include/models/table.cpp \
     ../../../include/helpers/datetimehelper.cpp \
@@ -48,8 +46,6 @@ HEADERS += \
     ssbfile.h \
     z0gfile.h \
     ../../../include/modules/curvestructs.h \
-    ../../../include/managers/databasemanager.h \
-    ../../../include/managers/managerbase.h \
     ../../../include/models/station.h \
     ../../../include/models/table.h \
     ../../../include/helpers/datetimehelper.h \

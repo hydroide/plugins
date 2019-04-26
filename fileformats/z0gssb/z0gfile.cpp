@@ -10,11 +10,11 @@
 #include <QtSql>
 #endif
 
-#include "managers/databasemanager.h"
 #include "models/table.h"
 #include "models/station.h"
 #include "helpers/datetimehelper.h"
 
+#include "z0gssbplugin.h"
 
 Z0gFile::Z0gFile(const QString& filename)
 {
@@ -37,7 +37,15 @@ void Z0gFile::readFile()
 
 #ifdef QT_SQL
     {
-        auto db = DatabaseManager::instance()->openDatabase();
+        auto db = Z0gSsbPlugin::DB;
+        if (!db.isValid()) {
+            QMessageBox::critical(nullptr, QObject::tr("错误"), QObject::tr("数据库不正常"));
+            return;
+        }
+        if (!db.open()) {
+            QMessageBox::critical(nullptr, QObject::tr("错误"), QObject::tr("数据库打开失败"));
+            return;
+        }
         db.transaction();
         QSqlQuery q(db);
 

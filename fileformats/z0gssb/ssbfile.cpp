@@ -10,13 +10,13 @@
 #include <QtSql>
 #endif
 
-#include "managers/databasemanager.h"
-
 //#include "models/dmeasurementrecord.h"
 //#include "models/sdmeasurementrecord.h"
 #include "models/table.h"
 
 #include "helpers/datetimehelper.h"
+
+#include "z0gssbplugin.h"
 
 SsbFile::SsbFile(const QString& filename)
 {
@@ -38,7 +38,15 @@ void SsbFile::readFile()
     }
 #ifdef QT_SQL
     {
-        auto db = DatabaseManager::instance()->openDatabase();
+        auto db = Z0gSsbPlugin::DB;
+        if (!db.isValid()) {
+            QMessageBox::critical(nullptr, QObject::tr("错误"), QObject::tr("数据库不正常"));
+            return;
+        }
+        if (!db.open()) {
+            QMessageBox::critical(nullptr, QObject::tr("错误"), QObject::tr("数据库打开失败"));
+            return;
+        }
         db.transaction();
         QSqlQuery q(db);
 
