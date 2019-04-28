@@ -9,7 +9,7 @@
 class SsbFile : public ZBFile
 {
 public:
-    SsbFile(const QString&);
+    SsbFile(const QString &filepath);
 
     void readFile();
     void writeFile();

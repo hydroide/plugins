@@ -11,7 +11,7 @@
 class Z0gFile : public ZBFile
 {
 public:
-    Z0gFile(const QString&);
+    Z0gFile(const QString &filepath);
 
     void readFile();
     void writeFile();

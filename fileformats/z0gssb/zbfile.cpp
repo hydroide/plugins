@@ -2,7 +2,12 @@
 
 #include <QMessageBox>
 
-ZBFile::ZBFile()
+ZBFile::ZBFile(const QString &filepath)
+{
+    _pfile = new QFile(filepath);
+}
+
+ZBFile::~ZBFile()
 {
 
 }

@@ -11,7 +11,12 @@
 class ZBFile
 {
 public:
-    ZBFile();
+    ZBFile(const QString &filepath);
+    virtual ~ZBFile();
+
+    virtual void readFile() = 0;
+    virtual void writeFile() = 0;
+
 
 protected:
     bool checkDuplication(QSqlDatabase db, const QString &stcd, int year, QList<Table> tables);

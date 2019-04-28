@@ -16,9 +16,10 @@
 
 #include "z0gssbplugin.h"
 
-Z0gFile::Z0gFile(const QString& filename)
+Z0gFile::Z0gFile(const QString &filepath)
+    : ZBFile(filepath)
 {
-    _pfile = new QFile(filename);
+
 }
 
 void Z0gFile::readFile()
