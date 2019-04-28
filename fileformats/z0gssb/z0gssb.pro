@@ -35,22 +35,19 @@ SOURCES += \
         z0gssbplugin.cpp \
     ssbfile.cpp \
     z0gfile.cpp \
-    ../../../include/modules/curvestructs.cpp \
+    zbfile.cpp \
     ../../../include/models/station.cpp \
     ../../../include/models/table.cpp \
     ../../../include/helpers/datetimehelper.cpp \
-    ../../../include/helpers/roundinghelper.cpp
 
 HEADERS += \
         z0gssbplugin.h \
     ssbfile.h \
     z0gfile.h \
-    ../../../include/modules/curvestructs.h \
+    zbfile.h \
     ../../../include/models/station.h \
     ../../../include/models/table.h \
     ../../../include/helpers/datetimehelper.h \
-    ../../../include/helpers/mathhelper.h \
-    ../../../include/helpers/roundinghelper.h
 
 DISTFILES += z0gssb.json 
 

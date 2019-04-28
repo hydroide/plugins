@@ -6,7 +6,9 @@
 
 #include <QtCore>
 
-class Z0gFile
+#include "zbfile.h"
+
+class Z0gFile : public ZBFile
 {
 public:
     Z0gFile(const QString&);
@@ -14,9 +16,6 @@ public:
     void readFile();
     void writeFile();
 
-protected:
-    QString _filename;
-    QFile *_pfile{nullptr};
 };
 
 #endif // Z0GFILE_H

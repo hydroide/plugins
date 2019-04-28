@@ -4,9 +4,9 @@
 #ifndef SSBFILE_H
 #define SSBFILE_H
 
-#include <QtCore>
+#include "zbfile.h"
 
-class SsbFile
+class SsbFile : public ZBFile
 {
 public:
     SsbFile(const QString&);
@@ -14,9 +14,6 @@ public:
     void readFile();
     void writeFile();
 
-protected:
-    QString _filename;
-    QFile *_pfile{nullptr};
 };
 
 #endif // SSBFILE_H

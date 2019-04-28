@@ -60,6 +60,16 @@ void SsbFile::readFile()
         int year = line2.mid(1*n, n).trimmed().toInt();
         int totalRecordCount = line2.mid(2*n, n).trimmed().toInt();
 
+        QList<Table> tables;
+        tables << Table("ZQ_MEASUREMENT")
+               << Table("SQ_MEASUREMENT")
+               << Table("CS_SURVEY")
+               << Table("CS_VERTICAL");
+        if (!checkDuplication(db, stcd, year, tables)) {
+            db.close();
+            return;
+        }
+
         q.exec("BEGIN;");
 
         QProgressDialog progress(QObject::tr("正在导入：") + _pfile->fileName(),
