@@ -1,3 +1,4 @@
 TEMPLATE    = subdirs
 SUBDIRS	    = testplugin \
-              fileformats
+    fileformats \
+    processviewer
