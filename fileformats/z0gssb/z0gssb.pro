@@ -32,7 +32,7 @@ INCLUDEPATH    += ../../../interfaces \
     ../../../include
 
 SOURCES += \
-        z0gssbplugin.cpp \
+    z0gssbplugin.cpp \
     ssbfile.cpp \
     z0gfile.cpp \
     zbfile.cpp \
@@ -41,7 +41,7 @@ SOURCES += \
     ../../../include/helpers/datetimehelper.cpp \
 
 HEADERS += \
-        z0gssbplugin.h \
+    z0gssbplugin.h \
     ssbfile.h \
     z0gfile.h \
     zbfile.h \
