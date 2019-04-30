@@ -28,26 +28,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH    += ../../../interfaces \
-    ../../../include
+INCLUDEPATH    += \
+    ../../../commons \
+    ../../../interfaces
+
+LIBS += -L../../../commons/release -lcommons
 
 SOURCES += \
     z0gssbplugin.cpp \
     ssbfile.cpp \
     z0gfile.cpp \
-    zbfile.cpp \
-    ../../../include/models/station.cpp \
-    ../../../include/models/table.cpp \
-    ../../../include/helpers/datetimehelper.cpp \
+    zbfile.cpp
 
 HEADERS += \
     z0gssbplugin.h \
     ssbfile.h \
     z0gfile.h \
-    zbfile.h \
-    ../../../include/models/station.h \
-    ../../../include/models/table.h \
-    ../../../include/helpers/datetimehelper.h \
+    zbfile.h
 
 DISTFILES += z0gssb.json 
 
