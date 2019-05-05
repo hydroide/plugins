@@ -32,7 +32,12 @@ INCLUDEPATH    += \
     ../../../commons \
     ../../../interfaces
 
-LIBS += -L../../../commons/release -lcommons
+win32 {
+    CONFIG(debug, release|debug): LIBSUBDIR = debug/
+    CONFIG(release, release|debug): LIBSUBDIR = release/
+}
+
+LIBS += -L../../../commons/$$LIBSUBDIR -lcommons
 
 SOURCES += \
     z0gssbplugin.cpp \

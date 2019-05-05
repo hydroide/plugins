@@ -28,8 +28,13 @@ INCLUDEPATH    += \
     ../../graphicswidgets \
     ../../interfaces
 
-LIBS += -L../../commons/release -lcommons
-LIBS += -L../../graphicswidgets/release -lgraphicswidgets
+win32 {
+    CONFIG(debug, release|debug): LIBSUBDIR = debug/
+    CONFIG(release, release|debug): LIBSUBDIR = release/
+}
+
+LIBS += -L../../commons/$$LIBSUBDIR -lcommons
+LIBS += -L../../graphicswidgets/$$LIBSUBDIR -lgraphicswidgets
 
 SOURCES += \
     processviewer.cpp \
