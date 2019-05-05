@@ -7,8 +7,11 @@
 //#include "../mainwindow.h"
 
 #include "models/station.h"
+#include "models/project.h"
 
 #include "colordelegate.h"
+
+extern SpProject g_project;
 
 ProcessViewer::ProcessViewer(QWidget *parent)
     : Viewer(parent)
@@ -691,6 +694,16 @@ void ProcessViewer::updateContext()
 //        _sb_selectYear->setMinimum(list.front());
 //        _sb_selectYear->setMaximum(list.back());
 //    }
+    if (g_project) {
+        auto dp = g_project->dataProvider();
+        if (dp) {
+            auto list = dp->zqs_process_year_list();
+            if (list.count() > 0) {
+                _sb_selectYear->setMinimum(list.front());
+                _sb_selectYear->setMaximum(list.back());
+            }
+        }
+    }
 }
 
 
@@ -742,6 +755,13 @@ void ProcessViewer::addViewToSplitter(QSplitter *splitter, ProcessChart *chart)
 //    auto list = DatabaseManager::instance()->getSTCDsFromZQ_PROCESS();
     QStringList list;
 
+    if (g_project) {
+        auto dp = g_project->dataProvider();
+        if (dp) {
+            list = dp->zq_process_stcd_list();
+        }
+    }
+
     for (auto const &stcd: list)
     {
         auto station = Station(stcd);
@@ -781,6 +801,13 @@ void ProcessViewer::addViewToSplitter(QSplitter *splitter, ProcessChart *chart)
 // Disabled to extract to a plugin
 //        auto list = DatabaseManager::instance()->getSTCDsFromZQ_PROCESS();
         QStringList list;
+
+        if (g_project) {
+            auto dp = g_project->dataProvider();
+            if (dp) {
+                list = dp->zq_process_stcd_list();
+            }
+        }
 
         for (const auto &stcd : list)
         {
