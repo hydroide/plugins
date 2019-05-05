@@ -1,4 +1,5 @@
 TEMPLATE    = subdirs
-SUBDIRS	    = testplugin \
+SUBDIRS	    = databasedataprovider \
+    testplugin \
     fileformats \
     processviewer
