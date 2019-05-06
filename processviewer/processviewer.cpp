@@ -6,6 +6,8 @@
 //#include "../globaldefines.h"
 //#include "../mainwindow.h"
 
+#include "helpers/colorhelper.h"
+
 #include "models/station.h"
 #include "models/project.h"
 
@@ -115,7 +117,7 @@ ProcessViewer::ProcessViewer(QWidget *parent)
     _viewOption->setMenu(menuScope);
     _insertTo = new QPushButton(tr("插到"), _hbox11Widget);
     _insertTo->setMenu(new QMenu(this));
-    _insertTo->menu()->addAction(tr("asdf"));
+    _insertTo->menu()->addAction(tr("选择打开的图表"));
     connect(_insertTo, &QPushButton::pressed, [=](){
         //    auto *menu = _insertTo->menu();
         //    menu->addAction(tr("测试"));
@@ -181,6 +183,11 @@ ProcessViewer::ProcessViewer(QWidget *parent)
                 out.setFieldAlignment(QTextStream::AlignRight);
 
                 ProcessSeries series;
+
+                if (g_project && g_project->dataProvider()) {
+                    series.setDataProvider(g_project->dataProvider());
+                }
+
                 series.setSTCD(sid);
                 series.setStartDateTime(startdt);
                 series.setEndDateTime(enddt);
@@ -747,46 +754,6 @@ void ProcessViewer::addViewToSplitter(QSplitter *splitter, ProcessChart *chart)
     auto grid2 = new QGridLayout(grid2Widget);
     grid2->setContentsMargins(0, 0, 0, 0);
 
-    auto addSeriesButton = new QPushButton(tr("添加序列"),
-                                           grid2Widget);
-    auto addSeriesMenu = new QMenu(addSeriesButton);
-
-// Disabled to extract to a plugin
-//    auto list = DatabaseManager::instance()->getSTCDsFromZQ_PROCESS();
-    QStringList list;
-
-    if (g_project) {
-        auto dp = g_project->dataProvider();
-        if (dp) {
-            list = dp->zq_process_stcd_list();
-        }
-    }
-
-    for (auto const &stcd: list)
-    {
-        auto station = Station(stcd);
-        auto action = addSeriesMenu->addAction(station.getDisplayName());
-        action->setData(stcd);
-        connect(action, &QAction::triggered, [=]() {
-            auto series = std::make_shared<ProcessSeries>();
-            series->setSTCD(action->data().toString());
-            QList<int> list;
-            list.append(qrand()%255);
-            list.append(qrand()%127);
-            list.append(qrand()%63);
-            std::random_shuffle(list.begin(), list.end());
-//            series->setLineColor(QColor(list[0], list[1], list[2]));
-            chart->addSeries(series);
-            chart->setStartDateTime(_dte_startDateTime->dateTime());
-            chart->setEndDateTime(_dte_endDateTime->dateTime());
-        });
-    }
-
-    addSeriesButton->setMenu(addSeriesMenu);
-    addSeriesButton->setFixedWidth(100);
-
-//    grid2->addWidget(addSeriesButton, 0, 0);
-
     QMap<QStandardItem *, QStandardItem *> stationColorMap;
 
     auto generatStationSelectorModel = [this, &stationColorMap](ProcessChart *chart)
@@ -798,8 +765,6 @@ void ProcessViewer::addViewToSplitter(QSplitter *splitter, ProcessChart *chart)
         QStandardItem *parentItem = model->invisibleRootItem();
 
 
-// Disabled to extract to a plugin
-//        auto list = DatabaseManager::instance()->getSTCDsFromZQ_PROCESS();
         QStringList list;
 
         if (g_project) {
@@ -857,13 +822,14 @@ void ProcessViewer::addViewToSplitter(QSplitter *splitter, ProcessChart *chart)
                 if (item->checkState() == Qt::Checked)
                 {
                     auto series = std::make_shared<ProcessSeries>();
+
+                    if (g_project && g_project->dataProvider()) {
+                        series->setDataProvider(g_project->dataProvider());
+                    }
+
                     series->setSTCD(stcd);
                     QList<int> list;
-                    list.append(qrand()%255);
-                    list.append(qrand()%127);
-                    list.append(qrand()%63);
-                    std::random_shuffle(list.begin(), list.end());
-                    auto color = QColor(list[0], list[1], list[2]);
+                    auto color = ColorHelper::random();
                     auto colorItem = stationColorMap[item];
                     if (colorItem)
                     {
@@ -873,11 +839,13 @@ void ProcessViewer::addViewToSplitter(QSplitter *splitter, ProcessChart *chart)
                     chart->addSeries(stcd, series);
                     chart->setStartDateTime(_dte_startDateTime->dateTime());
                     chart->setEndDateTime(_dte_endDateTime->dateTime());
+                    chart->update();
 
                 }
                 else // unchecked
                 {
                     chart->removeSeries(stcd);
+                    chart->update();
                 }
             }
 

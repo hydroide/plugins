@@ -41,6 +41,11 @@ unix {
     INSTALLS += target
 }
 
+BOOST_PATH = ../../dependencies/boost
+
+INCLUDEPATH += $$BOOST_PATH
+LIBS += -L"$$BOOST_PATH/stage/lib"
+
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../commons/release/ -lcommons
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../commons/debug/ -lcommons
 else:unix: LIBS += -L$$OUT_PWD/../../commons/ -lcommons

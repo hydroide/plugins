@@ -23,6 +23,20 @@ public:
 
     QList<int> zqs_process_year_list();
     QStringList zq_process_stcd_list();
+
+    QMap<QDateTime, QString> z_series(const QString &stcd, const QDateTime &startDateTime, const QDateTime &endDateTime);
+    QMap<QDateTime, QString> rq_series(const QString &stcd, const QDateTime &startDateTime, const QDateTime &endDateTime);
+    QMap<QDateTime, QString> s_series(const QString &stcd, const QDateTime &startDateTime, const QDateTime &endDateTime);
+
+    QMap<QDateTime, DGMeasuredDischarge> mq_series(const QString &stcd, const QDateTime &startDateTime, const QDateTime &endDateTime);
+    QMap<QDateTime, DGMeasuredSedimentDischarge> msq_series(const QString &stcd, const QDateTime &startDateTime, const QDateTime &endDateTime);
+
+    RelationCurve zq_curve(const QString &stcd, int year, int curve_id);
+    QList<DGSDRPeriod> zq_curves_periods(const QString &stcd, int year);
+
+private:
+    QSqlDatabase _db;
+
 };
 
 #endif // DATABASEDATAPROVIDERPLUGIN_H
