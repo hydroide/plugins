@@ -330,6 +330,7 @@ ProcessViewer::ProcessViewer(QWidget *parent)
     _grid->setSpacing(0);
 
     _buttonPlus1 = new QPushButton("+", _gridWidget);
+    _buttonPlus1->setFont(QFont("Arial", 20));
 
     auto menuAddChart = new QMenu();
     auto stageAction = menuAddChart->addAction(tr("水位过程线"));
@@ -347,7 +348,7 @@ ProcessViewer::ProcessViewer(QWidget *parent)
 
     _buttonPlus1->setMenu(menuAddChart);
 
-    _buttonPlus1->setMinimumWidth(200);
+    _buttonPlus1->setMinimumWidth(250);
     _buttonPlus1->setMinimumHeight(40);
     _buttonPlus1->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
@@ -750,7 +751,7 @@ void ProcessViewer::addViewToSplitter(QSplitter *splitter, ProcessChart *chart)
     grid->setContentsMargins(0, 0, 0, 0);
     grid->setSpacing(0);
     auto grid2Widget = new QWidget(gridWidget);
-    grid2Widget->setFixedWidth(150);
+    grid2Widget->setFixedWidth(200);
     auto grid2 = new QGridLayout(grid2Widget);
     grid2->setContentsMargins(0, 0, 0, 0);
 
@@ -888,10 +889,11 @@ void ProcessViewer::addViewToSplitter(QSplitter *splitter, ProcessChart *chart)
 
     auto treeView = new QTreeView(grid2Widget);
     treeView->setModel(generatStationSelectorModel(chart));
-    treeView->setColumnWidth(0, 110);
-    treeView->setColumnWidth(1, 20);
+//    treeView->setColumnWidth(0, 110);
     auto delegate = new ColorDelegate(treeView);
     treeView->setItemDelegateForColumn(1, delegate);
+    treeView->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    treeView->setColumnWidth(1, 20);
 //    treeView->setFixedWidth(150);
 
     grid2->addWidget(treeView, 1, 0);
