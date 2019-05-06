@@ -3,9 +3,6 @@
 #endif
 #include "processviewer.h"
 
-//#include "../globaldefines.h"
-//#include "../mainwindow.h"
-
 #include "helpers/colorhelper.h"
 
 #include "models/station.h"

@@ -10,6 +10,8 @@
 #include <QtSql>
 #endif
 
+#include "hcglobaldefs.h"
+
 #include "models/table.h"
 #include "models/station.h"
 #include "helpers/datetimehelper.h"

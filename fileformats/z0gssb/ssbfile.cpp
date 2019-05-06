@@ -10,8 +10,8 @@
 #include <QtSql>
 #endif
 
-//#include "models/dmeasurementrecord.h"
-//#include "models/sdmeasurementrecord.h"
+#include "hcglobaldefs.h"
+
 #include "models/table.h"
 
 #include "helpers/datetimehelper.h"
