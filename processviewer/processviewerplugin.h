@@ -1,8 +1,8 @@
 #ifndef PROCESSVIEWERPLUGIN_H
 #define PROCESSVIEWERPLUGIN_H
 
-#include <viewerinterface.h>
-#include <projectinterface.h>
+#include <interfaces/viewerinterface.h>
+#include <interfaces/projectinterface.h>
 
 class ProcessViewerPlugin : public QObject, public ViewerInterface, public ProjectInterface
 {

@@ -3,8 +3,8 @@
 
 #include <QtCore>
 #include <QtPlugin>
-#include <databaseinterface.h>
-#include <dataproviderinterface.h>
+#include <interfaces/databaseinterface.h>
+#include <interfaces/dataproviderinterface.h>
 
 class DatabaseDataProviderPlugin : public QObject, DatabaseInterface, DataProviderInterface
 {

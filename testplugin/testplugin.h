@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QtPlugin>
-#include "testinterface.h"
+#include "interfaces/testinterface.h"
 
 class TestPlugin : public QObject, TestInterface
 {

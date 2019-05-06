@@ -23,19 +23,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH    += \
-    ../../commons \
-    ../../graphicswidgets \
-    ../../interfaces
-
-win32 {
-    CONFIG(debug, release|debug): LIBSUBDIR = debug/
-    CONFIG(release, release|debug): LIBSUBDIR = release/
-}
-
-LIBS += -L../../commons/$$LIBSUBDIR -lcommons
-LIBS += -L../../graphicswidgets/$$LIBSUBDIR -lgraphicswidgets
-
 SOURCES += \
     processviewer.cpp \
     processviewerplugin.cpp
@@ -50,3 +37,29 @@ unix {
     target.path = /usr/lib
     INSTALLS += target
 }
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../commons/release/ -lcommons
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../commons/debug/ -lcommons
+else:unix: LIBS += -L$$OUT_PWD/../../commons/ -lcommons
+
+INCLUDEPATH += $$PWD/../../commons
+DEPENDPATH += $$PWD/../../commons
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../commons/release/libcommons.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../commons/debug/libcommons.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../commons/release/commons.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../commons/debug/commons.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../../commons/libcommons.a
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../../graphicswidgets/release/ -lgraphicswidgets
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../../graphicswidgets/debug/ -lgraphicswidgets
+else:unix: LIBS += -L$$OUT_PWD/../../graphicswidgets/ -lgraphicswidgets
+
+INCLUDEPATH += $$PWD/../../graphicswidgets
+DEPENDPATH += $$PWD/../../graphicswidgets
+
+win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../graphicswidgets/release/libgraphicswidgets.a
+else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../graphicswidgets/debug/libgraphicswidgets.a
+else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../graphicswidgets/release/graphicswidgets.lib
+else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../../graphicswidgets/debug/graphicswidgets.lib
+else:unix: PRE_TARGETDEPS += $$OUT_PWD/../../graphicswidgets/libgraphicswidgets.a

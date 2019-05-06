@@ -2,8 +2,8 @@
 #define Z0GSSBPLUGIN_H
 
 #include <QtPlugin>
-#include <fileimportinterface.h>
-#include <databaseinterface.h>
+#include <interfaces/fileimportinterface.h>
+#include <interfaces/databaseinterface.h>
 
 class Z0gSsbPlugin : public QObject, FileImportInterface, DatabaseInterface
 {
