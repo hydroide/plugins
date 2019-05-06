@@ -161,9 +161,7 @@ void SsbFile::readFile()
                 {
                     endDT.addDays(1);
                 }
-                //            qDebug() << start_time << end_time << date;
                 QDateTime averageDT = DateTimeHelper::averageDT(startDT, endDT);
-                //            qDebug() << averageDT << averageDT.toString(DEFAULT_DATETIME_FORMAT);
                 list.append(averageDT.toString(DEFAULT_DATETIME_FORMAT));
 
                 list.removeAt(0);
