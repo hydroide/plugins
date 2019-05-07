@@ -103,7 +103,7 @@ QMap<QDateTime, QString> DatabaseDataProviderPlugin::z_series(
                             "AND DATETIME(timestamp) >= DATETIME(:start) "
                             "AND DATETIME(timestamp) <= DATETIME(:end) "
                             "AND DATETIME(timestamp) <= DATETIME(:end) "
-                            "AND Strftime('%M%S', timestamp) = '0000' "
+//                            "AND Strftime('%M%S', timestamp) = '0000' "
                             "ORDER BY DATETIME(timestamp) ASC;";
 
         q.clear();
