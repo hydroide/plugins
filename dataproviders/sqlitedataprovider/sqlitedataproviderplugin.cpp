@@ -1,4 +1,4 @@
-#include "databasedataproviderplugin.h"
+#include "sqlitedataproviderplugin.h"
 
 #include <boost/multiprecision/cpp_dec_float.hpp>
 using Dec = boost::multiprecision::cpp_dec_float_50;
@@ -8,17 +8,17 @@ using Dec = boost::multiprecision::cpp_dec_float_50;
 #include "helpers/roundinghelper.h"
 #include "models/point.h"
 
-void DatabaseDataProviderPlugin::setDatabase(QSqlDatabase db)
+void SqliteDataProviderPlugin::setDatabase(QSqlDatabase db)
 {
     _db = db;
 }
 
-QString DatabaseDataProviderPlugin::type()
+QString SqliteDataProviderPlugin::type()
 {
-    return QString("database");
+    return QString("sqlite");
 }
 
-QList<int> DatabaseDataProviderPlugin::zqs_process_year_list()
+QList<int> SqliteDataProviderPlugin::zqs_process_year_list()
 {
     QList<int> list;
 
@@ -51,7 +51,7 @@ QList<int> DatabaseDataProviderPlugin::zqs_process_year_list()
     return list;
 }
 
-QStringList DatabaseDataProviderPlugin::zq_process_stcd_list()
+QStringList SqliteDataProviderPlugin::zq_process_stcd_list()
 {
     QStringList list;
 
@@ -82,7 +82,7 @@ QStringList DatabaseDataProviderPlugin::zq_process_stcd_list()
     return list;
 }
 
-QMap<QDateTime, QString> DatabaseDataProviderPlugin::z_series(
+QMap<QDateTime, QString> SqliteDataProviderPlugin::z_series(
         const QString &stcd,
         const QDateTime &startDateTime,
         const QDateTime &endDateTime)
@@ -131,7 +131,7 @@ QMap<QDateTime, QString> DatabaseDataProviderPlugin::z_series(
     return map;
 }
 
-QMap<QDateTime, QString> DatabaseDataProviderPlugin::rq_series(
+QMap<QDateTime, QString> SqliteDataProviderPlugin::rq_series(
         const QString &stcd,
         const QDateTime &startDateTime,
         const QDateTime &endDateTime)
@@ -209,7 +209,7 @@ QMap<QDateTime, QString> DatabaseDataProviderPlugin::rq_series(
     return dischargeMap;
 }
 
-QMap<QDateTime, QString> DatabaseDataProviderPlugin::s_series(
+QMap<QDateTime, QString> SqliteDataProviderPlugin::s_series(
         const QString &stcd,
         const QDateTime &startDateTime,
         const QDateTime &endDateTime)
@@ -274,7 +274,7 @@ QMap<QDateTime, QString> DatabaseDataProviderPlugin::s_series(
     return map;
 }
 
-QMap<QDateTime, DGMeasuredDischarge> DatabaseDataProviderPlugin::mq_series(
+QMap<QDateTime, DGMeasuredDischarge> SqliteDataProviderPlugin::mq_series(
             const QString &stcd,
             const QDateTime &startDateTime,
             const QDateTime &endDateTime)
@@ -315,7 +315,7 @@ QMap<QDateTime, DGMeasuredDischarge> DatabaseDataProviderPlugin::mq_series(
     return map;
 }
 
-QMap<QDateTime, DGMeasuredSedimentDischarge> DatabaseDataProviderPlugin::msq_series(
+QMap<QDateTime, DGMeasuredSedimentDischarge> SqliteDataProviderPlugin::msq_series(
         const QString &stcd,
         const QDateTime &startDateTime,
         const QDateTime &endDateTime)
@@ -359,7 +359,7 @@ QMap<QDateTime, DGMeasuredSedimentDischarge> DatabaseDataProviderPlugin::msq_ser
     return map;
 }
 
-RelationCurve DatabaseDataProviderPlugin::zq_curve(const QString &stcd, int year, int curve_id)
+RelationCurve SqliteDataProviderPlugin::zq_curve(const QString &stcd, int year, int curve_id)
 {
     RelationCurve obj;
     obj.stcd = stcd;
@@ -401,7 +401,7 @@ RelationCurve DatabaseDataProviderPlugin::zq_curve(const QString &stcd, int year
     return obj;
 }
 
-QList<DGSDRPeriod> DatabaseDataProviderPlugin::zq_curves_periods(const QString &stcd, int year)
+QList<DGSDRPeriod> SqliteDataProviderPlugin::zq_curves_periods(const QString &stcd, int year)
 {
     QList<DGSDRPeriod> list;
 

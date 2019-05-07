@@ -1,15 +1,15 @@
-#ifndef DATABASEDATAPROVIDERPLUGIN_H
-#define DATABASEDATAPROVIDERPLUGIN_H
+#ifndef SQLITEDATAPROVIDERPLUGIN_H
+#define SQLITEDATAPROVIDERPLUGIN_H
 
 #include <QtCore>
 #include <QtPlugin>
 #include <interfaces/databaseinterface.h>
 #include <interfaces/dataproviderinterface.h>
 
-class DatabaseDataProviderPlugin : public QObject, DatabaseInterface, DataProviderInterface
+class SqliteDataProviderPlugin : public QObject, DatabaseInterface, DataProviderInterface
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.hwsdsw.HydroCurve.DatabaseInterface" FILE "databasedataprovider.json")
+    Q_PLUGIN_METADATA(IID "org.hwsdsw.HydroCurve.DatabaseInterface" FILE "sqlitedataprovider.json")
     Q_INTERFACES(DatabaseInterface)
     Q_INTERFACES(DataProviderInterface)
 
@@ -39,4 +39,4 @@ private:
 
 };
 
-#endif // DATABASEDATAPROVIDERPLUGIN_H
+#endif // SQLITEDATAPROVIDERPLUGIN_H
