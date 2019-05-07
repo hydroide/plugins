@@ -2,14 +2,15 @@
 #define PROCESSVIEWERPLUGIN_H
 
 #include <interfaces/viewerinterface.h>
-#include <interfaces/projectinterface.h>
 
-class ProcessViewerPlugin : public QObject, public ViewerInterface, public ProjectInterface
+#include <interfaces/dataaccessorinterface.h>
+
+class ProcessViewerPlugin : public QObject, public ViewerInterface, DataAccessorInterface
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID "org.hwsdsw.HydroCurve.ViewerInterface" FILE "processviewer.json")
     Q_INTERFACES(ViewerInterface)
-    Q_INTERFACES(ProjectInterface)
+    Q_INTERFACES(DataAccessorInterface)
 
 public:
     ProcessViewerPlugin(QObject *parent = nullptr);
@@ -19,9 +20,9 @@ public:
     QWidget *create(QWidget *parent);
     QString name();
 
-    // ProjectInterface interface
+    // DataAccessorInterface interface
 public:
-    void setProject(SpProject project);
+    void setDataProvider(SpDataProviderInterface);
 };
 
 #endif // PROCESSVIEWERPLUGIN_H

@@ -2,7 +2,7 @@
 
 #include "processviewer.h"
 
-SpProject g_project{nullptr};
+SpDataProviderInterface g_dataProvider{nullptr};
 
 ProcessViewerPlugin::ProcessViewerPlugin(QObject *parent) :
     QObject(parent)
@@ -19,7 +19,7 @@ QString ProcessViewerPlugin::name()
     return tr("过程查看器");
 }
 
-void ProcessViewerPlugin::setProject(SpProject project)
+void ProcessViewerPlugin::setDataProvider(SpDataProviderInterface dataProvider)
 {
-    g_project = project;
+    g_dataProvider = dataProvider;
 }

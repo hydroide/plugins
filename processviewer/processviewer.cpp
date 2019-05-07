@@ -10,7 +10,7 @@
 
 #include "colordelegate.h"
 
-extern SpProject g_project;
+extern SpDataProviderInterface g_dataProvider;
 
 ProcessViewer::ProcessViewer(QWidget *parent)
     : Viewer(parent)
@@ -181,8 +181,8 @@ ProcessViewer::ProcessViewer(QWidget *parent)
 
                 ProcessSeries series;
 
-                if (g_project && g_project->dataProvider()) {
-                    series.setDataProvider(g_project->dataProvider());
+                if (g_dataProvider) {
+                    series.setDataProvider(g_dataProvider);
                 }
 
                 series.setSTCD(sid);
@@ -693,21 +693,12 @@ void ProcessViewer::showEvent(QShowEvent *event)
 
 void ProcessViewer::updateContext()
 {
-// Disabled to extract to a plugin
-//    auto list = DatabaseManager::instance()->getYearsFromZQSProcess();
-//    if (list.count() > 0) {
-//        _sb_selectYear->setMinimum(list.front());
-//        _sb_selectYear->setMaximum(list.back());
-//    }
-    if (g_project) {
-        auto dp = g_project->dataProvider();
-        if (dp) {
-            auto list = dp->zqs_process_year_list();
-            if (list.count() > 0) {
-                _sb_selectYear->setMinimum(list.front());
-                _sb_selectYear->setMaximum(list.back());
-                Q_EMIT _pb_selectMonth->click();
-            }
+    if (g_dataProvider) {
+        auto list = g_dataProvider->zqs_process_year_list();
+        if (list.count() > 0) {
+            _sb_selectYear->setMinimum(list.front());
+            _sb_selectYear->setMaximum(list.back());
+            Q_EMIT _pb_selectMonth->click();
         }
     }
 }
@@ -766,12 +757,10 @@ void ProcessViewer::addViewToSplitter(QSplitter *splitter, ProcessChart *chart)
 
         QStringList list;
 
-        if (g_project) {
-            auto dp = g_project->dataProvider();
-            if (dp) {
-                list = dp->zq_process_stcd_list();
-            }
+        if (g_dataProvider) {
+            list = g_dataProvider->zq_process_stcd_list();
         }
+
 
         for (const auto &stcd : list)
         {
@@ -822,8 +811,8 @@ void ProcessViewer::addViewToSplitter(QSplitter *splitter, ProcessChart *chart)
                 {
                     auto series = std::make_shared<ProcessSeries>();
 
-                    if (g_project && g_project->dataProvider()) {
-                        series->setDataProvider(g_project->dataProvider());
+                    if (g_dataProvider) {
+                        series->setDataProvider(g_dataProvider);
                     }
 
                     series->setSTCD(stcd);
