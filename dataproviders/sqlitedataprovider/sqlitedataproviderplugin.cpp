@@ -229,7 +229,6 @@ QMap<QDateTime, QString> SqliteDataProviderPlugin::s_series(
                 {
                     map.insert(q.value("timestamp").toDateTime(),
                                q.value("concentration").toString());
-                    qDebug() << q.value(0) << q.value(1);
                 }
             }
         };
