@@ -706,6 +706,7 @@ void ProcessViewer::updateContext()
             if (list.count() > 0) {
                 _sb_selectYear->setMinimum(list.front());
                 _sb_selectYear->setMaximum(list.back());
+                Q_EMIT _pb_selectMonth->click();
             }
         }
     }
