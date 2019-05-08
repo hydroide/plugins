@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
 
-SUBDIRS += \
-    sqlitedataprovider
+qtHaveModule(sql) {
+    SUBDIRS += sqlitedataprovider
+}

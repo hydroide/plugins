@@ -4,12 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets
-
-qtHaveModule(sql) {
-    QT += sql
-    DEFINES += QT_SQL
-}
+QT       += core gui widgets sql
 
 TARGET = sqlitedataprovider
 TEMPLATE = lib

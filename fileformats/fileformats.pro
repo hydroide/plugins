@@ -1,4 +1,5 @@
 TEMPLATE    = subdirs
 
-SUBDIRS += \
-        z0gssb
+qtHaveModule(sql) {
+    SUBDIRS += z0gssb
+}
