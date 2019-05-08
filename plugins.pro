@@ -3,4 +3,5 @@ SUBDIRS	    = \
     testplugin \
     fileformats \
     processviewer \
-    dataproviders
+    dataproviders \
+    managers
