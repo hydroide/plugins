@@ -10,7 +10,7 @@ TARGET = projectmanager
 TEMPLATE = lib
 CONFIG += plugin
 
-DESTDIR = $$[QT_INSTALL_PLUGINS]/generic
+DESTDIR = ../../../plugins
 
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
