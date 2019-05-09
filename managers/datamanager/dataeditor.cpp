@@ -10,6 +10,9 @@ DataEditor::DataEditor(const QString &tableName, QWidget *parent)
 {
 //    auto db = DatabaseManager::instance()->openDatabase();
     auto db = DB;
+    if (!db.open()) {
+        return;
+    }
     model = new SqlTableModel(this, db);
     model->setTable(tableName);
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
