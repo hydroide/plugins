@@ -131,7 +131,7 @@ QMap<QDateTime, QString> SqliteDataProviderPlugin::z_series(
     return map;
 }
 
-QMap<QDateTime, QString> SqliteDataProviderPlugin::rq_series(
+QMap<QDateTime, QString> SqliteDataProviderPlugin::q_series(
         const QString &stcd,
         const QDateTime &startDateTime,
         const QDateTime &endDateTime)

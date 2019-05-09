@@ -25,7 +25,7 @@ public:
     QStringList zq_process_stcd_list();
 
     QMap<QDateTime, QString> z_series(const QString &stcd, const QDateTime &startDateTime, const QDateTime &endDateTime);
-    QMap<QDateTime, QString> rq_series(const QString &stcd, const QDateTime &startDateTime, const QDateTime &endDateTime);
+    QMap<QDateTime, QString> q_series(const QString &stcd, const QDateTime &startDateTime, const QDateTime &endDateTime);
     QMap<QDateTime, QString> s_series(const QString &stcd, const QDateTime &startDateTime, const QDateTime &endDateTime);
 
     QMap<QDateTime, DGMeasuredDischarge> mq_series(const QString &stcd, const QDateTime &startDateTime, const QDateTime &endDateTime);
