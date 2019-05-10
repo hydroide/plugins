@@ -338,9 +338,31 @@ void Z0gFile::readFile()
             }
 
         }
-        q.exec("END;");
-        qDebug() << line; // 最后一行
+        auto sthd = line.split(',');
+        if (sthd[0].trimmed() == "STHD")
+        {
+            q.prepare("INSERT INTO STATION_INFO ("
+                      "stcd ,"
+                      "stnm ,"
+                      "sthd ,"
+                      "timestamp "
+                      ") VALUES(?,?,?,?)");
+            q.addBindValue(sthd[1].trimmed());
+            q.addBindValue(sthd[3].trimmed());
+            q.addBindValue(line);
+            q.addBindValue(QDateTime::currentDateTime().toString(DEFAULT_DATETIME_FORMAT));
+            if (q.exec())
+            {
 
+            }
+            else
+            {
+
+                qDebug() << q.lastQuery() << q.lastError();
+            }
+        }
+
+        q.exec("END;");
         progress.setValue(totalRecordCount);
 
         if (!db.commit())
