@@ -16,6 +16,7 @@ class SqliteDataProviderPlugin : public QObject, DatabaseInterface, DataProvider
     // DatabaseInterface interface
 public:
     void setDatabase(QSqlDatabase db);
+    bool initDatabase();
 
     // DataProviderInterface interface
 public:
@@ -36,7 +37,6 @@ public:
 
 private:
     QSqlDatabase _db;
-
 };
 
 #endif // SQLITEDATAPROVIDERPLUGIN_H

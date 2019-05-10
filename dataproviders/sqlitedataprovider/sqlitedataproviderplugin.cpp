@@ -8,9 +8,49 @@ using Dec = boost::multiprecision::cpp_dec_float_50;
 #include "helpers/roundinghelper.h"
 #include "models/point.h"
 
+#include "database/sqls.h"
+
 void SqliteDataProviderPlugin::setDatabase(QSqlDatabase db)
 {
     _db = db;
+}
+
+bool SqliteDataProviderPlugin::initDatabase()
+{
+    auto db = _db;
+
+    if (!(db.isValid() && db.open()))
+    {
+        return false;
+    }
+
+    bool ret = true;
+
+    QSqlQuery q(db);
+    ret &= q.exec(DROPEcss);
+    ret &= q.exec(DROPEcssv);
+    ret &= q.exec(DROPEsccn);
+    ret &= q.exec(DROPEscp);
+    ret &= q.exec(DROPEscr);
+    ret &= q.exec(DROPEsqm);
+    ret &= q.exec(DROPEstn);
+    ret &= q.exec(DROPEzqcn);
+    ret &= q.exec(DROPEzqm);
+    ret &= q.exec(DROPEzqp);
+    ret &= q.exec(DROPEzqr);
+
+    ret &= q.exec(CRTNEcss);
+    ret &= q.exec(CRTNEcssv);
+    ret &= q.exec(CRTNEsccn);
+    ret &= q.exec(CRTNEscp);
+    ret &= q.exec(CRTNEscr);
+    ret &= q.exec(CRTNEsqm);
+    ret &= q.exec(CRTNEstn);
+    ret &= q.exec(CRTNEzqcn);
+    ret &= q.exec(CRTNEzqm);
+    ret &= q.exec(CRTNEzqp);
+    ret &= q.exec(CRTNEzqr);
+    return ret;
 }
 
 QString SqliteDataProviderPlugin::type()
