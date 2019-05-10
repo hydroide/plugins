@@ -152,8 +152,8 @@ void SsbFile::readFile()
                     lastMethod = list[21];
                 }
 
-                QTime start_time(DateTimeHelper::fromMMSS(list[7]));
-                QTime end_time(DateTimeHelper::fromMMSS(list[8]));
+                QTime start_time(DateTimeHelper::fromHHmm(list[7]));
+                QTime end_time(DateTimeHelper::fromHHmm(list[8]));
                 QDate date(list[2].toInt(), list[5].toInt(), list[6].toInt());
                 QDateTime startDT(date, start_time);
                 QDateTime endDT(date, end_time);
@@ -249,8 +249,8 @@ void SsbFile::readFile()
                 }
 
 
-                QTime start_time(DateTimeHelper::fromMdotSS(list[8]));
-                QTime end_time(DateTimeHelper::fromMdotSS(list[9]));
+                QTime start_time(DateTimeHelper::fromHdot_m(list[8]));
+                QTime end_time(DateTimeHelper::fromHdot_m(list[9]));
                 QDate date(list[2].toInt(), list[6].toInt(), list[7].toInt());
                 QDateTime startDT(date, start_time);
                 QDateTime endDT(date, end_time);

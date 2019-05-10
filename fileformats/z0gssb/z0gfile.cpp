@@ -267,15 +267,20 @@ void Z0gFile::readFile()
                           "stcd,"
                           "year,"
                           "row_id,"
-                          "time,"
+                          "month ,"
+                          "day,"
+                          "time ,"
                           "concentration,"
                           "annotation,"
                           "timestamp"
-                          ") VALUES(?,?,?,?,?,?,?)");
+                          ") VALUES(?,?,?,?,?,?,?,?,?)");
                 q.addBindValue(list[1]);
                 q.addBindValue(list[2]);
                 q.addBindValue(list[3]);
-                q.addBindValue(list[4]);
+                auto shortDt = DateTimeHelper::formalizeShortFormat(list[4]);
+                q.addBindValue(shortDt.mid(0, 2));
+                q.addBindValue(shortDt.mid(2, 2));
+                q.addBindValue(shortDt.mid(4));
                 q.addBindValue(list[5]);
                 q.addBindValue(list[6]);
                 auto datetime = DateTimeHelper::fromShortFormat(
@@ -301,15 +306,20 @@ void Z0gFile::readFile()
                           "stcd ,"
                           "year ,"
                           "row_id ,"
+                          "month ,"
+                          "day,"
                           "time ,"
                           "stage ,"
                           "annotation ,"
                           "timestamp "
-                          ") VALUES(?,?,?,?,?,?,?)");
+                          ") VALUES(?,?,?,?,?,?,?,?,?)");
                 q.addBindValue(list[1]);
                 q.addBindValue(list[2]);
                 q.addBindValue(list[3]);
-                q.addBindValue(list[4]);
+                auto shortDt = DateTimeHelper::formalizeShortFormat(list[4]);
+                q.addBindValue(shortDt.mid(0, 2));
+                q.addBindValue(shortDt.mid(2, 2));
+                q.addBindValue(shortDt.mid(4));
                 q.addBindValue(list[5]);
                 q.addBindValue(list[6]);
                 auto datetime = DateTimeHelper::fromShortFormat(
