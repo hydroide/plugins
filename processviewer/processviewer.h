@@ -15,6 +15,8 @@ public:
 protected:
     void addViewToSplitter(QSplitter *splitter, ProcessChart *chart);
 
+    QDateTime viewStartDateTime() const;
+    QDateTime viewEndDateTime() const;
     QWidget *_vbox10Widget;
     QVBoxLayout *_vbox10;
     QHBoxLayout *_hbox11;

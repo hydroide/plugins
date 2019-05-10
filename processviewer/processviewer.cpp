@@ -708,8 +708,8 @@ void ProcessViewer::updateContext()
 void ProcessViewer::addViewToSplitter(QSplitter *splitter, ProcessChart *chart)
 {
     // fix bug of not setting start/end datetime when init.
-    chart->setStartDateTime(_dte_startDateTime->dateTime());
-    chart->setEndDateTime(_dte_endDateTime->dateTime());
+    chart->setStartDateTime(viewStartDateTime());
+    chart->setEndDateTime(viewEndDateTime());
 
     // connect selection changing event to each other with the help of this.
     connect(chart, SIGNAL(selectionChanging(qreal,qreal)),
@@ -825,8 +825,8 @@ void ProcessViewer::addViewToSplitter(QSplitter *splitter, ProcessChart *chart)
                     }
                     series->setLineColor(color);
                     chart->addSeries(stcd, series);
-                    chart->setStartDateTime(_dte_startDateTime->dateTime());
-                    chart->setEndDateTime(_dte_endDateTime->dateTime());
+                    chart->setStartDateTime(viewStartDateTime());
+                    chart->setEndDateTime(viewEndDateTime());
                     chart->update();
 
                 }
@@ -905,4 +905,20 @@ void ProcessViewer::addViewToSplitter(QSplitter *splitter, ProcessChart *chart)
 
     _views.append(view);
     _processCharts.append(chart);
+}
+
+QDateTime ProcessViewer::viewStartDateTime() const
+{
+    if (_processCharts.length() > 0) {
+        return _processCharts[0]->startDateTime();
+    }
+    return _dte_startDateTime->dateTime();
+}
+
+QDateTime ProcessViewer::viewEndDateTime() const
+{
+    if (_processCharts.length() > 0) {
+        return _processCharts[0]->endDateTime();
+    }
+    return _dte_endDateTime->dateTime();
 }
