@@ -190,6 +190,10 @@ QMap<QDateTime, QString> SqliteDataProviderPlugin::q_series(
     for (auto key : stageMap.keys())
     {
         int year = key.date().year();
+        // fix 01-01 00:00 no q bug
+        if (key == QDateTime(QDate(year, 1, 1))) {
+            year--;
+        }
         QList<qint64> timeSpans;
         if (!periodMap.contains(year))
         {
