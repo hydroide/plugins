@@ -191,7 +191,7 @@ QMap<QDateTime, QString> SqliteDataProviderPlugin::q_series(
     {
         int year = key.date().year();
         // fix 01-01 00:00 no q bug
-        if (key == QDateTime(QDate(year, 1, 1))) {
+        if (key == QDateTime(QDate(year, 1, 1)) && key == stageMap.keys().last()) {
             year--;
         }
         QList<qint64> timeSpans;
